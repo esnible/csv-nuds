@@ -1,0 +1,460 @@
+ <nuds xmlns="http://nomisma.org/nuds" xmlns:mets="http://www.loc.gov/METS/" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://nomisma.org/nuds http://nomisma.org/nuds.xsd" recordType="physical">
+   <control>
+     <recordId>58627</recordId>
+   </control>
+   <descMeta>
+     <title>AY, Sasanian AR drachm, Khusru II</title>
+     <typeDesc>
+       <denomination>dirham</denomination>
+       <material href="http://nomisma.org/id/ar" type="simple">Silver</material>
+     </typeDesc>
+     <physDesc>
+       <measurementSet>
+         <diameter units="mm">30</diameter>
+       </measurementSet>
+     </physDesc>
+   </descMeta>
+   <digRep>
+     <mets:fileSec>
+       <mets:fileGrp>
+         <mets:file>
+           <mets:FLocat LOCTYPE="URL" xlink:href="https://zeno.ru/data/7532/medium/File6779_.jpg"></mets:FLocat>
+         </mets:file>
+       </mets:fileGrp>
+     </mets:fileSec>
+   </digRep>
+ </nuds>
+ <nuds xmlns="http://nomisma.org/nuds" xmlns:mets="http://www.loc.gov/METS/" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://nomisma.org/nuds http://nomisma.org/nuds.xsd" recordType="physical">
+   <control>
+     <recordId>90886</recordId>
+   </control>
+   <descMeta>
+     <title>GD yr. 33, Khusru II AR Drachm</title>
+     <typeDesc>
+       <denomination>drachm</denomination>
+       <material href="http://nomisma.org/id/ar" type="simple">Silver</material>
+     </typeDesc>
+     <physDesc>
+       <measurementSet>
+         <diameter units="mm">24.83</diameter>
+       </measurementSet>
+     </physDesc>
+   </descMeta>
+   <digRep>
+     <mets:fileSec>
+       <mets:fileGrp>
+         <mets:file>
+           <mets:FLocat LOCTYPE="URL" xlink:href="https://zeno.ru/data/7528/medium/001-2_37-24_83mm.jpg"></mets:FLocat>
+         </mets:file>
+       </mets:fileGrp>
+     </mets:fileSec>
+   </digRep>
+ </nuds>
+ <nuds xmlns="http://nomisma.org/nuds" xmlns:mets="http://www.loc.gov/METS/" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://nomisma.org/nuds http://nomisma.org/nuds.xsd" recordType="physical">
+   <control>
+     <recordId>264199</recordId>
+   </control>
+   <descMeta>
+     <title>Sasanid , Kaykhusru 2 , AR drakhme</title>
+     <typeDesc>
+       <denomination>Drakhm</denomination>
+       <material href="http://nomisma.org/id/ar" type="simple">Silver</material>
+     </typeDesc>
+     <physDesc>
+       <measurementSet>
+         <diameter units="mm">29</diameter>
+       </measurementSet>
+     </physDesc>
+   </descMeta>
+   <digRep>
+     <mets:fileSec>
+       <mets:fileGrp>
+         <mets:file>
+           <mets:FLocat LOCTYPE="URL" xlink:href="https://zeno.ru/data/2807/medium/Kaykhusru-24.jpg"></mets:FLocat>
+         </mets:file>
+       </mets:fileGrp>
+     </mets:fileSec>
+   </digRep>
+ </nuds>
+ <nuds xmlns="http://nomisma.org/nuds" xmlns:mets="http://www.loc.gov/METS/" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://nomisma.org/nuds http://nomisma.org/nuds.xsd" recordType="physical">
+   <control>
+     <recordId>133138</recordId>
+   </control>
+   <descMeta>
+     <title>AV dénár, mint?, 33rd r.y.</title>
+     <typeDesc>
+       <material href="http://nomisma.org/id/av" type="simple">Gold</material>
+     </typeDesc>
+   </descMeta>
+   <digRep>
+     <mets:fileSec>
+       <mets:fileGrp>
+         <mets:file>
+           <mets:FLocat LOCTYPE="URL" xlink:href="https://zeno.ru/data/2807/medium/12911.JPG"></mets:FLocat>
+         </mets:file>
+       </mets:fileGrp>
+     </mets:fileSec>
+   </digRep>
+ </nuds>
+ <nuds xmlns="http://nomisma.org/nuds" xmlns:mets="http://www.loc.gov/METS/" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://nomisma.org/nuds http://nomisma.org/nuds.xsd" recordType="physical">
+   <control>
+     <recordId>178453</recordId>
+   </control>
+   <descMeta>
+     <title>BBA yr. 13, Khusru II AR Drachm</title>
+     <typeDesc>
+       <denomination>Drachm</denomination>
+       <material href="http://nomisma.org/id/ar" type="simple">Silver</material>
+     </typeDesc>
+   </descMeta>
+   <digRep>
+     <mets:fileSec>
+       <mets:fileGrp>
+         <mets:file>
+           <mets:FLocat LOCTYPE="URL" xlink:href="https://zeno.ru/data/7519/medium/KhusruIIBBA13.jpg"></mets:FLocat>
+         </mets:file>
+       </mets:fileGrp>
+     </mets:fileSec>
+   </digRep>
+ </nuds>
+ <nuds xmlns="http://nomisma.org/nuds" xmlns:mets="http://www.loc.gov/METS/" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://nomisma.org/nuds http://nomisma.org/nuds.xsd" recordType="physical">
+   <control>
+     <recordId>205081</recordId>
+   </control>
+   <descMeta>
+     <title>ART yr ?, Khusru II.</title>
+     <typeDesc>
+       <denomination>drachm</denomination>
+       <material href="http://nomisma.org/id/ar" type="simple">Silver</material>
+     </typeDesc>
+     <physDesc>
+       <measurementSet>
+         <diameter units="mm">31</diameter>
+       </measurementSet>
+     </physDesc>
+   </descMeta>
+   <digRep>
+     <mets:fileSec>
+       <mets:fileGrp>
+         <mets:file>
+           <mets:FLocat LOCTYPE="URL" xlink:href="https://zeno.ru/data/7526/medium/zzz56.jpg"></mets:FLocat>
+         </mets:file>
+       </mets:fileGrp>
+     </mets:fileSec>
+   </digRep>
+ </nuds>
+ <nuds xmlns="http://nomisma.org/nuds" xmlns:mets="http://www.loc.gov/METS/" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://nomisma.org/nuds http://nomisma.org/nuds.xsd" recordType="physical">
+   <control>
+     <recordId>261151</recordId>
+   </control>
+   <descMeta>
+     <title>Silver washed AE drachm,  fouree Khusru II Sassanian</title>
+     <typeDesc>
+       <denomination>drachm</denomination>
+       <material>silver washed AE</material>
+     </typeDesc>
+     <physDesc>
+       <measurementSet>
+         <diameter units="mm">30</diameter>
+       </measurementSet>
+     </physDesc>
+   </descMeta>
+   <digRep>
+     <mets:fileSec>
+       <mets:fileGrp>
+         <mets:file>
+           <mets:FLocat LOCTYPE="URL" xlink:href="https://zeno.ru/data/2807/medium/2_74g_30_mm.jpg"></mets:FLocat>
+         </mets:file>
+       </mets:fileGrp>
+     </mets:fileSec>
+   </digRep>
+ </nuds>
+ <nuds xmlns="http://nomisma.org/nuds" xmlns:mets="http://www.loc.gov/METS/" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://nomisma.org/nuds http://nomisma.org/nuds.xsd" recordType="physical">
+   <control>
+     <recordId>202812</recordId>
+   </control>
+   <descMeta>
+     <title>Jeweller&#39;s cast imitation of a drachm of Khusro II, ART</title>
+     <typeDesc>
+       <material>Tin-zinc alloy</material>
+     </typeDesc>
+     <physDesc>
+       <measurementSet>
+         <diameter units="mm">32</diameter>
+       </measurementSet>
+     </physDesc>
+   </descMeta>
+   <digRep>
+     <mets:fileSec>
+       <mets:fileGrp>
+         <mets:file>
+           <mets:FLocat LOCTYPE="URL" xlink:href="https://zeno.ru/data/7526/medium/DSC_3173.JPG"></mets:FLocat>
+         </mets:file>
+       </mets:fileGrp>
+     </mets:fileSec>
+   </digRep>
+ </nuds>
+ <nuds xmlns="http://nomisma.org/nuds" xmlns:mets="http://www.loc.gov/METS/" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://nomisma.org/nuds http://nomisma.org/nuds.xsd" recordType="physical">
+   <control>
+     <recordId>114239</recordId>
+   </control>
+   <descMeta>
+     <title>Khusru II, cast modern fake?</title>
+     <typeDesc></typeDesc>
+   </descMeta>
+   <digRep>
+     <mets:fileSec>
+       <mets:fileGrp>
+         <mets:file>
+           <mets:FLocat LOCTYPE="URL" xlink:href="https://zeno.ru/data/2807/medium/SNV81190_92.jpg"></mets:FLocat>
+         </mets:file>
+       </mets:fileGrp>
+     </mets:fileSec>
+   </digRep>
+ </nuds>
+ <nuds xmlns="http://nomisma.org/nuds" xmlns:mets="http://www.loc.gov/METS/" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://nomisma.org/nuds http://nomisma.org/nuds.xsd" recordType="physical">
+   <control>
+     <recordId>226894</recordId>
+   </control>
+   <descMeta>
+     <title>AY, AR drakhm Khusru II.</title>
+     <typeDesc>
+       <denomination>DRakhm</denomination>
+       <material href="http://nomisma.org/id/ar" type="simple">Silver</material>
+     </typeDesc>
+     <physDesc>
+       <measurementSet>
+         <diameter units="mm">32</diameter>
+       </measurementSet>
+     </physDesc>
+   </descMeta>
+   <digRep>
+     <mets:fileSec>
+       <mets:fileGrp>
+         <mets:file>
+           <mets:FLocat LOCTYPE="URL" xlink:href="https://zeno.ru/data/7532/medium/Kaykhusru-2.jpg"></mets:FLocat>
+         </mets:file>
+       </mets:fileGrp>
+     </mets:fileSec>
+   </digRep>
+ </nuds>
+ <nuds xmlns="http://nomisma.org/nuds" xmlns:mets="http://www.loc.gov/METS/" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://nomisma.org/nuds http://nomisma.org/nuds.xsd" recordType="physical">
+   <control>
+     <recordId>86863</recordId>
+   </control>
+   <descMeta>
+     <title>YZ, Khusru II</title>
+     <typeDesc>
+       <denomination>Drachm</denomination>
+       <material href="http://nomisma.org/id/ar" type="simple">Silver</material>
+     </typeDesc>
+     <physDesc>
+       <measurementSet>
+         <diameter units="mm">31</diameter>
+       </measurementSet>
+     </physDesc>
+   </descMeta>
+   <digRep>
+     <mets:fileSec>
+       <mets:fileGrp>
+         <mets:file>
+           <mets:FLocat LOCTYPE="URL" xlink:href="https://zeno.ru/data/7554/medium/Sasanian_Hosraw_II_YZ.jpg"></mets:FLocat>
+         </mets:file>
+       </mets:fileGrp>
+     </mets:fileSec>
+   </digRep>
+ </nuds>
+ <nuds xmlns="http://nomisma.org/nuds" xmlns:mets="http://www.loc.gov/METS/" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://nomisma.org/nuds http://nomisma.org/nuds.xsd" recordType="physical">
+   <control>
+     <recordId>171611</recordId>
+   </control>
+   <descMeta>
+     <title>YZ yr. x2, Khusru II AR drachm</title>
+     <typeDesc>
+       <denomination>drachm</denomination>
+       <material href="http://nomisma.org/id/ar" type="simple">Silver</material>
+     </typeDesc>
+     <physDesc>
+       <measurementSet>
+         <diameter units="mm">31</diameter>
+       </measurementSet>
+     </physDesc>
+   </descMeta>
+   <digRep>
+     <mets:fileSec>
+       <mets:fileGrp>
+         <mets:file>
+           <mets:FLocat LOCTYPE="URL" xlink:href="https://zeno.ru/data/7554/medium/Pictures50.jpg"></mets:FLocat>
+         </mets:file>
+       </mets:fileGrp>
+     </mets:fileSec>
+   </digRep>
+ </nuds>
+ <nuds xmlns="http://nomisma.org/nuds" xmlns:mets="http://www.loc.gov/METS/" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://nomisma.org/nuds http://nomisma.org/nuds.xsd" recordType="physical">
+   <control>
+     <recordId>215652</recordId>
+   </control>
+   <descMeta>
+     <title>? yr. ?, Khusru II AR drachm</title>
+     <typeDesc></typeDesc>
+   </descMeta>
+   <digRep>
+     <mets:fileSec>
+       <mets:fileGrp>
+         <mets:file>
+           <mets:FLocat LOCTYPE="URL" xlink:href="https://zeno.ru/data/2807/medium/6_Sassanid_Khusro_II_yr_vr_mint_vr_4_2g31-32mm_z.jpg"></mets:FLocat>
+         </mets:file>
+       </mets:fileGrp>
+     </mets:fileSec>
+   </digRep>
+ </nuds>
+ <nuds xmlns="http://nomisma.org/nuds" xmlns:mets="http://www.loc.gov/METS/" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://nomisma.org/nuds http://nomisma.org/nuds.xsd" recordType="physical">
+   <control>
+     <recordId>288868</recordId>
+   </control>
+   <descMeta>
+     <title>WYHC yr. 7, Sasanian AR drachm, Khusru II</title>
+     <typeDesc></typeDesc>
+   </descMeta>
+   <digRep>
+     <mets:fileSec>
+       <mets:fileGrp>
+         <mets:file>
+           <mets:FLocat LOCTYPE="URL" xlink:href="https://zeno.ru/data/7553/medium/Sasanid_Khusro_II_WYHC_yr7_4_1g30-32mm_z.jpg"></mets:FLocat>
+         </mets:file>
+       </mets:fileGrp>
+     </mets:fileSec>
+   </digRep>
+ </nuds>
+ <nuds xmlns="http://nomisma.org/nuds" xmlns:mets="http://www.loc.gov/METS/" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://nomisma.org/nuds http://nomisma.org/nuds.xsd" recordType="physical">
+   <control>
+     <recordId>215653</recordId>
+   </control>
+   <descMeta>
+     <title>DA yr. 2, Sasanian AR drachm, Khusru II</title>
+     <typeDesc></typeDesc>
+   </descMeta>
+   <digRep>
+     <mets:fileSec>
+       <mets:fileGrp>
+         <mets:file>
+           <mets:FLocat LOCTYPE="URL" xlink:href="https://zeno.ru/data/7523/medium/5_Sassanid_Khusro_II_yr_2_mint_DA_3_4g26-28mm_z.jpg"></mets:FLocat>
+         </mets:file>
+       </mets:fileGrp>
+     </mets:fileSec>
+   </digRep>
+ </nuds>
+ <nuds xmlns="http://nomisma.org/nuds" xmlns:mets="http://www.loc.gov/METS/" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://nomisma.org/nuds http://nomisma.org/nuds.xsd" recordType="physical">
+   <control>
+     <recordId>215654</recordId>
+   </control>
+   <descMeta>
+     <title>ST yr. 3, Sasanian, Khusru II</title>
+     <typeDesc></typeDesc>
+   </descMeta>
+   <digRep>
+     <mets:fileSec>
+       <mets:fileGrp>
+         <mets:file>
+           <mets:FLocat LOCTYPE="URL" xlink:href="https://zeno.ru/data/7549/medium/4_Sassanid_Khusro_II_yr_3_mint_ST_4_0g28-30mm_z.jpg"></mets:FLocat>
+         </mets:file>
+       </mets:fileGrp>
+     </mets:fileSec>
+   </digRep>
+ </nuds>
+ <nuds xmlns="http://nomisma.org/nuds" xmlns:mets="http://www.loc.gov/METS/" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://nomisma.org/nuds http://nomisma.org/nuds.xsd" recordType="physical">
+   <control>
+     <recordId>215668</recordId>
+   </control>
+   <descMeta>
+     <title>AHM yr. 31, Khusru II AR drachm</title>
+     <typeDesc></typeDesc>
+   </descMeta>
+   <digRep>
+     <mets:fileSec>
+       <mets:fileGrp>
+         <mets:file>
+           <mets:FLocat LOCTYPE="URL" xlink:href="https://zeno.ru/data/7521/medium/8_Sassanid_Khusro_II_yr_31_mint_AHM_4_1g31-33mm_z.jpg"></mets:FLocat>
+         </mets:file>
+       </mets:fileGrp>
+     </mets:fileSec>
+   </digRep>
+ </nuds>
+ <nuds xmlns="http://nomisma.org/nuds" xmlns:mets="http://www.loc.gov/METS/" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://nomisma.org/nuds http://nomisma.org/nuds.xsd" recordType="physical">
+   <control>
+     <recordId>70773</recordId>
+   </control>
+   <descMeta>
+     <title>LD yr. 3x, Khusru II AR drachm</title>
+     <typeDesc>
+       <denomination>drachm</denomination>
+       <material href="http://nomisma.org/id/ar" type="simple">Silver</material>
+     </typeDesc>
+     <physDesc>
+       <measurementSet>
+         <diameter units="mm">32</diameter>
+       </measurementSet>
+     </physDesc>
+   </descMeta>
+   <digRep>
+     <mets:fileSec>
+       <mets:fileGrp>
+         <mets:file>
+           <mets:FLocat LOCTYPE="URL" xlink:href="https://zeno.ru/data/7541/medium/sassanian_Khusru_II_590-627_1_dirhem_M20_4_11g_32mm.jpg"></mets:FLocat>
+         </mets:file>
+       </mets:fileGrp>
+     </mets:fileSec>
+   </digRep>
+ </nuds>
+ <nuds xmlns="http://nomisma.org/nuds" xmlns:mets="http://www.loc.gov/METS/" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://nomisma.org/nuds http://nomisma.org/nuds.xsd" recordType="physical">
+   <control>
+     <recordId>73591</recordId>
+   </control>
+   <descMeta>
+     <title>DA yr.  4, Khusru II AR Drachm</title>
+     <typeDesc>
+       <denomination>drachm</denomination>
+       <material href="http://nomisma.org/id/ar" type="simple">Silver</material>
+     </typeDesc>
+     <physDesc>
+       <measurementSet>
+         <diameter units="mm">28.42</diameter>
+       </measurementSet>
+     </physDesc>
+   </descMeta>
+   <digRep>
+     <mets:fileSec>
+       <mets:fileGrp>
+         <mets:file>
+           <mets:FLocat LOCTYPE="URL" xlink:href="https://zeno.ru/data/7523/medium/sasany01.jpg"></mets:FLocat>
+         </mets:file>
+       </mets:fileGrp>
+     </mets:fileSec>
+   </digRep>
+ </nuds>
+ <nuds xmlns="http://nomisma.org/nuds" xmlns:mets="http://www.loc.gov/METS/" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://nomisma.org/nuds http://nomisma.org/nuds.xsd" recordType="physical">
+   <control>
+     <recordId>73593</recordId>
+   </control>
+   <descMeta>
+     <title>WYH yr. 35, Khusru II AR Drachm</title>
+     <typeDesc>
+       <denomination>drachm</denomination>
+       <material href="http://nomisma.org/id/ar" type="simple">Silver</material>
+     </typeDesc>
+     <physDesc>
+       <measurementSet>
+         <diameter units="mm">27.02</diameter>
+       </measurementSet>
+     </physDesc>
+   </descMeta>
+   <digRep>
+     <mets:fileSec>
+       <mets:fileGrp>
+         <mets:file>
+           <mets:FLocat LOCTYPE="URL" xlink:href="https://zeno.ru/data/7552/medium/sasany03.jpg"></mets:FLocat>
+         </mets:file>
+       </mets:fileGrp>
+     </mets:fileSec>
+   </digRep>
+ </nuds>
