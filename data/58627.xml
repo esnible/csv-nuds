@@ -9,7 +9,7 @@
      <maintenanceHistory>
        <maintenanceEvent>
          <eventType>derived</eventType>
-         <eventDateTime standardDateTime="2022-03-18 13:15:26.441702 -0400 EDT m=+0.000462020">03-18-2022 13:15:26</eventDateTime>
+         <eventDateTime standardDateTime="2022-03-18 13:49:22.562641 -0400 EDT m=+0.000353639">03-18-2022 13:49:22</eventDateTime>
          <agentType>machine</agentType>
          <agent>csv-nuds</agent>
        </maintenanceEvent>
@@ -34,8 +34,8 @@
    </descMeta>
    <digRep>
      <mets:fileSec>
-       <mets:fileGrp>
-         <mets:file>
+       <mets:fileGrp USE="combined">
+         <mets:file USE="reference">
            <mets:FLocat LOCTYPE="URL" xlink:href="https://zeno.ru/data/7532/medium/File6779_.jpg"></mets:FLocat>
          </mets:file>
        </mets:fileGrp>

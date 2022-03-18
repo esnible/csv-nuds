@@ -361,6 +361,15 @@ type FileSec struct {
 // into a nested (hierarchical) arrangement....
 type FileGrp struct {
 	File []File `xml:"mets:file"`
+
+	// <xsd:attribute name="USE" type="xsd:string" use="optional">
+	// USE (string/O): A tagging attribute to indicate the intended use of
+	// files within this file group (e.g., master, reference, thumbnails for
+	// image files). A USE attribute can be expressed at the<fileGrp> level,
+	// the <file> level, the <FLocat> level and/or the <FContent> level. A USE
+	// attribute value at the <fileGrp> level should pertain to all of the
+	// files in the <fileGrp>.
+	USE string `xml:"USE,attr,omitempty"`
 }
 
 // The file element <file> provides access to the content files for the
@@ -370,6 +379,15 @@ type FileGrp struct {
 // of the file....
 type File struct {
 	FLocat []FLocat `xml:"mets:FLocat"`
+
+	// <xsd:attribute name="USE" type="xsd:string" use="optional">
+	// USE (string/O): A tagging attribute to indicate the intended use of
+	// files within this file group (e.g., master, reference, thumbnails for
+	// image files). A USE attribute can be expressed at the<fileGrp> level,
+	// the <file> level, the <FLocat> level and/or the <FContent> level. A USE
+	// attribute value at the <fileGrp> level should pertain to all of the
+	// files in the <fileGrp>.
+	USE string `xml:"USE,attr,omitempty"`
 }
 
 // The file location element <FLocat> provides a pointer to the location

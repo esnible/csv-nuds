@@ -213,12 +213,14 @@ func coinSingleURLImageHandler(coin *simplenuds.NUDS, val string) error {
 		coin.DefaultDigRep().FileSec.FileGrp = []simplenuds.FileGrp{
 			{
 				File: []simplenuds.File{},
+				USE:  "combined", // This handler is for single URLs, so "combined"
 			},
 		}
 	}
 
 	coin.DefaultDigRep().FileSec.FileGrp[0].AppendFile(
 		simplenuds.File{
+			USE: "reference",
 			FLocat: []simplenuds.FLocat{
 				{
 					LOCTYPE: "URL",
