@@ -9,7 +9,7 @@
      <maintenanceHistory>
        <maintenanceEvent>
          <eventType>derived</eventType>
-         <eventDateTime standardDateTime="2022-03-18 11:29:08.046543 -0400 EDT m=+0.000454434">03-18-2022 11:29:08</eventDateTime>
+         <eventDateTime standardDateTime="2022-03-18 13:15:26.441702 -0400 EDT m=+0.000462020">03-18-2022 13:15:26</eventDateTime>
          <agentType>machine</agentType>
          <agent>csv-nuds</agent>
        </maintenanceEvent>
@@ -28,6 +28,7 @@
      <physDesc>
        <measurementsSet>
          <diameter units="mm">30</diameter>
+         <weight units="g">3.7</weight>
        </measurementsSet>
      </physDesc>
    </descMeta>

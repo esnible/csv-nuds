@@ -157,12 +157,15 @@ type MeasurementsSet struct {
 	// <xs:element minOccurs="0" ref="diameter"/>
 	Diameter *Diameter `xml:"diameter"`
 
+	// TODO
 	// <xs:element minOccurs="0" ref="height"/>
 	// <xs:element minOccurs="0" ref="thickness"/>
 	// <xs:element minOccurs="0" ref="length"/>
 	// <xs:element minOccurs="0" ref="specificGravity"/>
-	// <xs:element minOccurs="0" ref="weight"/>
 	// <xs:element minOccurs="0" ref="width"/>
+
+	// <xs:element minOccurs="0" ref="weight"/>
+	Weight *Weight `xml:"weight"`
 }
 
 // Diameter (in decimal numbers) of a round object. Units and precision
@@ -172,6 +175,16 @@ type Diameter struct {
 	// TODO Try to use Golang anonymous type inheritance here
 
 	// Names the unit used for the measurement. Suggested values include: 1] g; 2] cm; 3] mm
+	Units string `xml:"units,attr,omitempty"`
+
+	Value string `xml:",chardata"`
+}
+
+// Weight encoded in decimal numbers, usually by grams.
+type Weight struct {
+	// Example:
+	// <weight units="g">4.14</weight>
+
 	Units string `xml:"units,attr,omitempty"`
 
 	Value string `xml:",chardata"`

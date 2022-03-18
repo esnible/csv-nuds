@@ -9,6 +9,7 @@ import (
 	"io"
 	"net/url"
 	"os"
+	"strconv"
 	"strings"
 
 	"github.com/esnible/csv-nuds/simplenuds"
@@ -47,7 +48,7 @@ var (
 		Metal:        metalHandler,
 		Diameter:     diameterInMMHandler,
 		Title:        titleHandler,
-		Weight:       unimplementedHandler,
+		Weight:       weightHandler,
 		Mint:         mintHandler,
 		URLRights:    rightsURLHandler,
 		Source:       sourceHandler,
@@ -265,6 +266,23 @@ func metalHandler(coin *simplenuds.NUDS, val string) error {
 func diameterInMMHandler(coin *simplenuds.NUDS, val string) error {
 	coin.DescMeta.DefaultPhysDesc().DefaultMeasurementsSet().Diameter = &simplenuds.Diameter{
 		Units: "mm",
+		Value: val,
+	}
+
+	return nil
+}
+
+func weightHandler(coin *simplenuds.NUDS, val string) error {
+	// Rewrite European comma-separated such as "3,7"
+	val = strings.Replace(val, ",", ".", 1)
+
+	// Validate data
+	if _, err := strconv.ParseFloat(val, 32); err != nil {
+		fmt.Fprintf(os.Stderr, "invalid weight %q; ignoring\n", val)
+	}
+
+	coin.DescMeta.DefaultPhysDesc().DefaultMeasurementsSet().Weight = &simplenuds.Weight{
+		Units: "g",
 		Value: val,
 	}
 
