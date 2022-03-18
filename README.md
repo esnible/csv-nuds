@@ -1,35 +1,37 @@
 
 # csv-nuds
 
-_csv-nuds_ is a proof-of-concept for a workflow to convert from numismatic data in spreadsheets to [NUDS](http://www.greekcoinage.org/nuds.html), a specification from [Nomisma.org](http://nomisma.org/)
+_csv-nuds_ is a proof-of-concept for a workflow to convert from numismatic data in spreadsheets to [NUDS](http://www.greekcoinage.org/nuds.html), a specification from [Nomisma.org](http://nomisma.org/).  (Pronunced "N.U.D.S.").
 
 Once the data is in NUDS format it can be loaded into [Numishare](https://github.com/ewg118/numishare) or other software that handles the NUDS format.
-
-**Currently it isn't working.**
 
 A lot of numismatic data is stored in relational databases or spreadsheets.  Many of these formats make it easy to export to flat [CSV](https://en.wikipedia.org/wiki/Comma-separated_values) files.  Those files are easy to manipulate manually or with scripts.
 
 The idea behind csv-nuds is to export all the data currently in flat files and databases and produce XML that is valid to [the NUDS schema](http://nomisma.org/nuds.xsd).  NUDS data can be loaded into Numishare or as an interchange format between different systems.
 
-## Implementation
-
-I was unable to generate language bindings from http://nomisma.org/nuds.xsd so I have created a simple subset of NUDS by hand.
-
-I have custom code to move data from named columns in CSV files into NUDS.
-
 ### Tutorial / Regenerating test data
 
 Install [Go](https://en.wikipedia.org/wiki/Go_(programming_language))
 
-Execute `go run csv2nuds.go data/zeno.csv data/every-zeno.csv > data/zeno.nuds.xml` to convert 20 records from an ad-hoc CSV file into NUDS XML.
-**Note that this XML is not a valid Document, as it contains more than one
-root.  It is a valid 'fragment'.**
+Execute `go run csv2nuds.go zeno data/zeno.csv data/every-zeno.csv` to convert 20 records from an ad-hoc CSV file into 20 NUDS XML files.
 
 Note: This data was manually scraped from [https://zeno.ru/](https://zeno.ru/).  It's just 20 random Khusru II drachms.  If anyone has public-domain or Creative Commons numismatic data in CSV format please let me know.
 
-Execute `go run csv2nuds.go data/58627.csv data/every-zeno.csv > data/58627.xml`
+## Applying NUDS to a Numishare server
 
-#### Limitations of the convert / questions about how to represent
+Generated NUDS can be be sent to Numishare with a script like this:
+
+```
+EXIST_HOST=localhost:8888
+COLLECTION=collection1
+EXIST_USER=admin
+EXIST_PASSWORD=
+for filename in zeno/*.xml; do
+   curl -v --user "$EXIST_USER":"$EXIST_PASSWORD" http://"$EXIST_HOST"/exist/rest/db/"$COLLECTION"/objects/ --upload-file "$filename"
+done 
+```
+
+## Limitations of the convert / questions about how to represent
 
 In addition to writing the data the tool currently outputs
 
@@ -58,18 +60,8 @@ For comparison between this tool's output and "real NUDS", an example Sasanian d
 
 My goal is for this tool to produce XML with a similar level of complexity.
 
-## Applying NUDS to a Numishare server
+## Implementation
 
-Generated NUDS can be be applied to Numishare with a script like this:
+I was unable to generate language bindings from http://nomisma.org/nuds.xsd so I have created a simple subset of NUDS by hand.
 
-```
-EXIST_HOST=localhost:8888
-COLLECTION=collection1
-EXIST_USER=admin
-EXIST_PASSWORD=
-curl -v --user "$EXIST_USER":"$EXIST_PASSWORD" http://"$EXIST_HOST"/exist/rest/db/"$COLLECTION"/objects/ --upload-file data/58627.xml
-```
-
-The current version of the convert doesn't automatically publish the images.
-
-The current version of the converter generates `<nuds>` root element for each line in the CSV.  If the CSV has >1 line, the generated XML will contain multiple roots.  Thus, this tool isn't yet working for multi-line CSVs.
+I have custom code to move data from named columns in CSV files into NUDS.

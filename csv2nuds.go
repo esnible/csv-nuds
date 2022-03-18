@@ -9,6 +9,7 @@ import (
 	"io"
 	"net/url"
 	"os"
+	"path/filepath"
 	"strconv"
 	"strings"
 
@@ -57,13 +58,18 @@ var (
 
 // Convert CSV to NUDS
 func main() {
-	if len(os.Args) < 2 || len(os.Args) > 3 {
-		fmt.Fprintf(os.Stderr, "syntax: %s <csvname> [<cvsname>]\n", os.Args[0])
+
+	if len(os.Args) < 3 || len(os.Args) > 4 {
+		fmt.Fprintf(os.Stderr, "syntax: %s <outputdir> <csvname> [<csvname>]\n", os.Args[0])
 		os.Exit(3)
 	}
 
+	dirName := os.Args[1]
+	csvName := os.Args[2]
+	csvEveryName := os.Args[3]
+
 	// We will generate one record for every row in the .CSV
-	csvCoinReader, cols, err := csvReader(os.Args[1])
+	csvCoinReader, cols, err := csvReader(csvName)
 	if err != nil {
 		fmt.Println(err.Error())
 		os.Exit(1)
@@ -78,10 +84,10 @@ func main() {
 
 	var recEveryCoin []string
 
-	if len(os.Args) == 3 {
+	if len(os.Args) == 4 {
 		var csvEveryCoinReader *csv.Reader
 
-		csvEveryCoinReader, colsEveryCoin, err = csvReader(os.Args[2])
+		csvEveryCoinReader, colsEveryCoin, err = csvReader(csvEveryName)
 		if err != nil {
 			fmt.Println(err.Error())
 			os.Exit(1)
@@ -89,7 +95,7 @@ func main() {
 
 		recEveryCoin, err = csvEveryCoinReader.Read()
 		if err != nil {
-			fmt.Println(err.Error())
+			fmt.Fprintln(os.Stderr, err.Error())
 			os.Exit(1)
 		}
 	}
@@ -101,18 +107,28 @@ func main() {
 			break
 		}
 		if err != nil {
-			fmt.Println(err.Error())
+			fmt.Fprintln(os.Stderr, err.Error())
 			os.Exit(1)
 		}
 
 		nuds, err := generateNUDS(cols, rec, colsEveryCoin, recEveryCoin)
 		if err != nil {
-			fmt.Println(err.Error())
+			fmt.Fprintln(os.Stderr, err.Error())
 			os.Exit(1)
 		}
 
-		out, _ := xml.MarshalIndent(nuds, " ", "  ")
-		fmt.Println(string(out))
+		fXML, err := os.Create(filepath.Join(dirName, nuds.Control.RecordID+".xml"))
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err.Error())
+			os.Exit(1)
+		}
+		encoder := xml.NewEncoder(fXML)
+		encoder.Indent(" ", "  ")
+		err = encoder.Encode(nuds)
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err.Error())
+			os.Exit(1)
+		}
 	}
 }
 
