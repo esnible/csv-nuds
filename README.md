@@ -27,6 +27,8 @@ root.  It is a valid 'fragment'.**
 
 Note: This data was manually scraped from [https://zeno.ru/](https://zeno.ru/).  It's just 20 random Khusru II drachms.  If anyone has public-domain or Creative Commons numismatic data in CSV format please let me know.
 
+Execute `go run csv2nuds.go data/58627.csv data/every-zeno.csv > data/58627.xml`
+
 #### Limitations of the convert / questions about how to represent
 
 In addition to writing the data the tool currently outputs
@@ -42,15 +44,13 @@ unimplemented metal: "silver washed AE"
 unimplemented metal: "Tin-zinc alloy"
 ```
 
-- In the next version I'll try to make the demo Zeno reporter and upload date into a <maintenanceEvent>.
+- In the next version I'll try to make the demo Zeno `reporter` and upload date into a `<maintenanceEvent>`.
 - I'll make `additionalDetails` into a `<noteSet>` `<note>`.
 - I'll make the Zeno `reporterUrl` into an `<acknowledgement>`.  (I originally considered `<copyrightHolder>` (even though it might not be), or perhaps `<owner>`).
 - I am not sure what to make the Zeno `url` into.  Zeno itself might be a `<collection>` (but of images, not coins).  There should be some kind of way to refer/link to another representation of the same object, but I don't know it.
-- The Zeno category (not currently in the CSV) will become a `<department>`
+- The Zeno category (not currently in the CSV) will become a `<department>`.  There will be thousands of them.
 - Numishare has `<material xlink:href="http://nomisma.org/id/sn" xlink:type="simple">Tin</material>` but nothing for a Tin-zinc alloy.
 - I don't know how to represent "silver washed AE"
-
-Execute `go run csv2nuds.go data/58627.csv data/every-zeno.csv > data/58627.xml`
 
 For comparison between this tool's output and "real NUDS", an example Sasanian drachm in [the ANS collection](http://numismatics.org/search/) can be fetched from their server.
 
@@ -67,7 +67,7 @@ EXIST_HOST=localhost:8888
 COLLECTION=collection1
 EXIST_USER=admin
 EXIST_PASSWORD=
-curl -v --user "$EXIST_USER":"$EXIST_PASSWORD" http://"$EXIST_HOST"/exist/rest/db/"$COLLECTION"/objects/ --upload-file data/zeno.nuds
+curl -v --user "$EXIST_USER":"$EXIST_PASSWORD" http://"$EXIST_HOST"/exist/rest/db/"$COLLECTION"/objects/ --upload-file data/58627.xml
 ```
 
 The current version of the convert doesn't automatically publish the images.
