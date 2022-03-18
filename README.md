@@ -33,7 +33,6 @@ no handler for field 3 ("date"); ignoring
 no handler for field 10 ("reporter"); ignoring
 no handler for field 11 ("reporterUrl"); ignoring
 no handler for field 0 ("source"); ignoring
-no handler for field 1 ("rights"); ignoring
 no handler for field 12 ("additionalDetails"); ignoring
 unimplemented metal: "silver washed AE"
 unimplemented metal: "Tin-zinc alloy"

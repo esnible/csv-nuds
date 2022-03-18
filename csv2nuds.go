@@ -7,6 +7,7 @@ import (
 	"encoding/xml"
 	"fmt"
 	"io"
+	"net/url"
 	"os"
 	"strings"
 
@@ -14,7 +15,8 @@ import (
 )
 
 const (
-	// Column names in CSV file we hope to support in v0.1
+	// Column names in CSV file we hope to support in v0.1.
+	// These *MUST* be lower-case here.  In the .CSV they can be any case.
 	URLCoin           = "url"
 	CoinID            = "id"
 	URLCoinImage      = "imageurl"
@@ -30,6 +32,7 @@ const (
 	Mint              = "mint"
 	Date              = "date"
 	AdditionalDetails = "additionaldetails"
+	URLRights         = "rightsurl"
 )
 
 type handler func(coin *simplenuds.NUDS, val string) error
@@ -45,6 +48,7 @@ var (
 		Title:        titleHandler,
 		Weight:       unimplementedHandler,
 		Mint:         mintHandler,
+		URLRights:    rightsUrlHandler,
 	}
 )
 
@@ -137,12 +141,12 @@ func generateColumnLookup(cols []string) map[int]string {
 func generateNUDS(colLookup map[int]string, coin []string, everyColLookup map[int]string, every []string) (simplenuds.NUDS, error) {
 	retval := simplenuds.NewNUDS("physical")
 
-	err := applyNuds(&retval, colLookup, coin)
+	err := applyNuds(&retval, everyColLookup, every)
 	if err != nil {
 		return retval, err
 	}
 
-	err = applyNuds(&retval, everyColLookup, every)
+	err = applyNuds(&retval, colLookup, coin)
 	if err != nil {
 		return retval, err
 	}
@@ -269,6 +273,37 @@ func mintHandler(coin *simplenuds.NUDS, val string) error {
 
 func titleHandler(coin *simplenuds.NUDS, val string) error {
 	coin.DescMeta.Title = val
+	return nil
+}
+
+func rightsUrlHandler(coin *simplenuds.NUDS, val string) error {
+	// Example
+	// <control>
+	//   <rightsStmt>
+	//     <license for="data" xlink:type="simple" xlink:href="http://opendatacommons.org/licenses/odbl/">Metadata are openly licensed with a Open Data Commons Open Database License (ODbL)</license>
+	//     <license for="images" xlink:type="simple" xlink:href="https://creativecommons.org/choose/mark/">Public Domain Mark</license>
+	//     <rights xlink:type="simple" xlink:href="http://rightsstatements.org/vocab/NoC-US/1.0/">No Copyright - United States</rights>
+	// </rightsStmt>
+
+	// warn and ignore if val is not an URL
+	_, err := url.ParseRequestURI(val)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "%q is not a valid URL\n", val)
+		return nil
+	}
+
+	// This implementation gives the same right to data and images
+	coin.Control.RightsStmt.AppendLicense(simplenuds.License{
+		For:  "data",
+		Type: "simple",
+		Href: val,
+	})
+	coin.Control.RightsStmt.AppendLicense(simplenuds.License{
+		For:  "images",
+		Type: "simple",
+		Href: val,
+	})
+
 	return nil
 }
 

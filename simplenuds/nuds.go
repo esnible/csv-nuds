@@ -40,7 +40,10 @@ type Control struct {
 	// <xs:element ref="maintenanceStatus"/>
 	// <xs:element ref="maintenanceAgency"/>
 	// <xs:element ref="maintenanceHistory"/>
+
 	// <xs:element ref="rightsStmt"/>
+	RightsStmt RightsStmt `xml:"rightsStmt"`
+
 	// <xs:element maxOccurs="unbounded" minOccurs="0" ref="semanticDeclaration"/>
 }
 
@@ -158,6 +161,32 @@ type Material struct {
 	Text string `xml:",chardata"`
 }
 
+// Statement of rights recording the NUDS record
+type RightsStmt struct {
+	// <xs:element minOccurs="0" ref="copyrightHolder"/>
+
+	// <xs:element minOccurs="0" maxOccurs="unbounded" ref="license"/>
+	License []License `xml:"license"`
+
+	// <xs:element minOccurs="0" maxOccurs="unbounded" ref="rights"/>
+	// <xs:element minOccurs="0" ref="preferCite"/>
+	// <xs:element minOccurs="0" ref="date"/>
+}
+
+// A statement of the metadata license. It is recommended to link to a license
+// provided by Creative Commons for images or other digital facsimiles or the
+// Open Data Commons for the metadata.
+type License struct {
+	// <xs:attribute name="for">
+	For string `xml:"for,attr"`
+
+	// <xs:simpleType>
+	Type string `xml:"xlink:type,attr"`
+
+	Href  string `xml:"xlink:href,attr"`
+	Value string `xml:",chardata"`
+}
+
 type DigRep struct {
 	// XMLName  xml.Name `xml:"control"`
 	FileSec FileSec `xml:"mets:fileSec"`
@@ -251,6 +280,16 @@ func (fileGrp *FileGrp) AppendFile(file File) {
 	fileGrp.File = append(
 		files,
 		file)
+}
+
+func (rightsStmt *RightsStmt) AppendLicense(license License) {
+	licenses := rightsStmt.License
+	if licenses == nil {
+		licenses = []License{}
+	}
+	rightsStmt.License = append(
+		licenses,
+		license)
 }
 
 // Generators
