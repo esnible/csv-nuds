@@ -1,6 +1,9 @@
 package simplenuds
 
-import "encoding/xml"
+import (
+	"encoding/xml"
+	"time"
+)
 
 // See http://nomisma.org/nuds.xsd
 // NUDS: root element of a NUDS document.
@@ -20,7 +23,9 @@ type NUDS struct {
 	XSI_NS         string `xml:"xmlns:xsi,attr"`
 	SchemaLocation string `xml:"xsi:schemaLocation,attr"`
 
-	// The @recordType is a required attribute for the <nuds> root element. A record must be 'conceptual' (a coin type or die typology) or 'physical'.
+	// The @recordType is a required attribute for the <nuds> root element.
+	// A record must be 'conceptual' (a coin type or die typology) or
+	// 'physical'.
 	RecordType string `xml:"recordType,attr"`
 
 	Control  Control  `xml:"control"`
@@ -36,22 +41,34 @@ type Control struct {
 
 	// TODO
 	// <xs:element maxOccurs="unbounded" minOccurs="0" ref="otherRecordId"/>
+
 	// <xs:element ref="publicationStatus"/>
+	PublicationStatus PublicationStatus `xml:"publicationStatus"`
+
 	// <xs:element ref="maintenanceStatus"/>
+	MaintenanceStatus MaintenanceStatus `xml:"maintenanceStatus"`
+
 	// <xs:element ref="maintenanceAgency"/>
+	MaintenanceAgency MaintenanceAgency `xml:"maintenanceAgency"`
+
 	// <xs:element ref="maintenanceHistory"/>
+	MaintenanceHistory MaintenanceHistory `xml:"maintenanceHistory"`
 
 	// <xs:element ref="rightsStmt"/>
 	RightsStmt RightsStmt `xml:"rightsStmt"`
 
 	// <xs:element maxOccurs="unbounded" minOccurs="0" ref="semanticDeclaration"/>
+	// <xs:attribute ref="xml:id"/>
+	// <xs:attribute ref="xml:lang"/>
 }
 
 // The Descriptive Metadata element is one of two required elements within <nuds>.
-// It is the container for all descriptive metadata containers for an object or typology. <typeDesc> is the only required child element.
+// It is the container for all descriptive metadata containers for an object or typology.
+// <typeDesc> is the only required child element.
 type DescMeta struct {
 	// <xs:element maxOccurs="unbounded" ref="title"/>
-	Title string `xml:"title"`
+	// Title may be repeated if the title is to be available in numerous languages
+	Title []Title `xml:"title"`
 
 	// TODO
 	//<xs:element minOccurs="0" ref="descriptionSet"/>
@@ -71,8 +88,21 @@ type DescMeta struct {
 	//<xs:element minOccurs="0" ref="adminDesc"/>
 }
 
+// Object title. It may be repeated if the title is to be available in numerous languages
+type Title struct {
+	// <xs:attribute ref="xml:id"/>
+
+	// <xs:attribute ref="xml:lang" use="required"/>
+	Lang string `xml:"xml:lang,attr"`
+
+	// <xs:attributeGroup ref="nuds_a.localType"/>
+	Value string `xml:",chardata"`
+}
+
 // The Typological Description, <typeDesc>, is a container for
-// typological characteristics of a resource, whether a physical object or a coin type. The <typeDesc> is the only required top-level descriptive element within <descMeta>.
+// typological characteristics of a resource, whether a physical
+// object or a coin type. The <typeDesc> is the only required top-level
+// descriptive element within <descMeta>.
 type TypeDesc struct {
 	// <xs:element minOccurs="0" ref="objectType"/>
 	// <xs:choice>
@@ -114,7 +144,7 @@ type PhysDesc struct {
 	// <xs:element minOccurs="0" maxOccurs="1" ref="dateOnObject"/>
 
 	// <xs:element minOccurs="0" maxOccurs="1" ref="measurementsSet"/>
-	MeasurementsSet *MeasurementsSet `xml:"measurementSet"`
+	MeasurementsSet *MeasurementsSet `xml:"measurementsSet"`
 
 	// <xs:element minOccurs="0" maxOccurs="unbounded" ref="serialNumber"/>
 	// <xs:element minOccurs="0" maxOccurs="1" ref="shape"/>
@@ -135,9 +165,11 @@ type MeasurementsSet struct {
 	// <xs:element minOccurs="0" ref="width"/>
 }
 
-// Diameter (in decimal numbers) of a round object. Units and precision may be included as attributes. The <diameter> should not be used in conjunction with <height> and <width>.
+// Diameter (in decimal numbers) of a round object. Units and precision
+// may be included as attributes. The <diameter> should not be used in
+// conjunction with <height> and <width>.
 type Diameter struct {
-	// TODO Try to use Golang anonymous type inheritence here
+	// TODO Try to use Golang anonymous type inheritance here
 
 	// Names the unit used for the measurement. Suggested values include: 1] g; 2] cm; 3] mm
 	Units string `xml:"units,attr,omitempty"`
@@ -159,6 +191,115 @@ type Material struct {
 	Type string `xml:"type,attr,omitempty"`
 
 	Text string `xml:",chardata"`
+}
+
+type PublicationStatus struct {
+	// <xs:enumeration value="inProcess"/>
+	// <xs:enumeration value="approved"/>
+	// <xs:enumeration value="approvedSubtype"/>
+	// <xs:enumeration value="deprecatedType"/>
+	Value string `xml:",chardata"`
+}
+
+// ... records the current drafting status of an NUDS instance.
+type MaintenanceStatus struct {
+	// <xs:enumeration value="new"/>
+	// <xs:enumeration value="derived"/>
+	// <xs:enumeration value="revised"/>
+	// <xs:enumeration value="cancelled"/>
+	// <xs:enumeration value="cancelledSplit"/>
+	// <xs:enumeration value="cancelledReplaced"/>
+	Value string `xml:",chardata"`
+}
+
+// The institution or service responsible for the creation, maintenance,
+// and/or dissemination of the NUDS instance.
+type MaintenanceAgency struct {
+	// <xs:element ref="agencyName"/>
+	AgencyName AgencyName `xml:"agencyName"`
+
+	// TODO
+	// <xs:element minOccurs="0" ref="agencyCode"/>
+	// <xs:element maxOccurs="unbounded" minOccurs="0" ref="otherAgencyCode"/>
+}
+
+// The name of the institution or service responsible for the creation,
+// maintenance, and/or dissemination of the NUDS instance.
+type AgencyName struct {
+	// TODO
+	// <xs:attribute ref="xml:id"/>
+	// <xs:attribute ref="xml:lang"/>
+
+	Value string `xml:",chardata"`
+}
+
+// A required wrapper element within <control> to record the history and
+// creation of the EAC-CPF instance.
+type MaintenanceHistory struct {
+	// <xs:element maxOccurs="unbounded" ref="maintenanceEvent"/>
+	MaintenanceEvent []MaintenanceEvent `xml:"maintenanceEvent"`
+
+	// TODO
+	// <xs:attribute ref="xml:id"/>
+	// <xs:attribute ref="xml:lang"/>
+}
+
+// ... details modification dates and descriptions of changes, including the
+// person or process responsible for making the change.
+type MaintenanceEvent struct {
+	// <xs:element ref="eventType"/>
+	EventType EventType `xml:"eventType"`
+
+	// <xs:element ref="eventDateTime"/>
+	EventDateTime EventDateTime `xml:"eventDateTime"`
+
+	// <xs:element ref="agentType"/>
+	AgentType AgentType `xml:"agentType"`
+
+	// <xs:element ref="agent"/>
+	Agent Agent `xml:"agent"`
+
+	// TODO
+	// <xs:element minOccurs="0" maxOccurs="1" ref="eventDescription"/>
+	// <xs:element minOccurs="0" maxOccurs="1" ref="source"/>
+	// <xs:attribute ref="xml:id"/>
+	// <xs:attribute ref="xml:lang"/>
+}
+
+// ... On first creation, the event type would be "created".
+// A "derived" event type is available to indicate that the record was
+// derived from another descriptive system ...
+type EventType struct {
+	// <xs:enumeration value="created"/>
+	// <xs:enumeration value="revised"/>
+	// <xs:enumeration value="deleted"/>
+	// <xs:enumeration value="cancelled"/>
+	// <xs:enumeration value="cancelledSplit"/>
+	// <xs:enumeration value="derived"/>
+	// <xs:enumeration value="updated"/>
+	Value string `xml:",chardata"`
+}
+
+type EventDateTime struct {
+	// For example <eventDateTime standardDateTime="2020-07-31T13:12:46-05:00">Fri, 31 Jul 2020</eventDateTime>
+
+	// The date or date and time represented in a standard form for computer processing.
+	StandardDateTime string `xml:"standardDateTime,attr"`
+
+	Value string `xml:",chardata"`
+}
+
+// The type of agent responsible for modifying the NUDS record: "human" or "machine".
+type AgentType struct {
+	// <xs:enumeration value="human"/>
+	// <xs:enumeration value="machine"/>
+	Value string `xml:",chardata"`
+}
+
+// The name of the agent responsible for the <maintenanceEvent>.
+type Agent struct {
+	// e.g. <agent>PHP</agent>
+	Value string `xml:",chardata"`
 }
 
 // Statement of rights recording the NUDS record
@@ -233,6 +374,7 @@ func (nuds *NUDS) DefaultDigRep() *DigRep {
 	if nuds.DigRep == nil {
 		nuds.DigRep = &DigRep{}
 	}
+
 	return nuds.DigRep
 }
 
@@ -240,6 +382,7 @@ func (descMeta *DescMeta) DefaultPhysDesc() *PhysDesc {
 	if descMeta.PhysDesc == nil {
 		descMeta.PhysDesc = &PhysDesc{}
 	}
+
 	return descMeta.PhysDesc
 }
 
@@ -247,7 +390,18 @@ func (physDesc *PhysDesc) DefaultMeasurementsSet() *MeasurementsSet {
 	if physDesc.MeasurementsSet == nil {
 		physDesc.MeasurementsSet = &MeasurementsSet{}
 	}
+
 	return physDesc.MeasurementsSet
+}
+
+func (descMeta *DescMeta) DefaultTitle() []Title {
+	if descMeta.Title == nil {
+		descMeta.Title = []Title{
+			{}, // title is minOccurs 1, maxOccurs unbounded
+		}
+	}
+
+	return descMeta.Title
 }
 
 // Appenders
@@ -257,6 +411,7 @@ func (typeDesc *TypeDesc) AppendDenomination(denomination Denomination) {
 	if denominations == nil {
 		denominations = []Denomination{}
 	}
+
 	typeDesc.Denomination = append(
 		denominations,
 		denomination)
@@ -303,6 +458,29 @@ func NewNUDS(recordType string) NUDS {
 		XLINK_NS:       "http://www.w3.org/1999/xlink",
 		XSI_NS:         "http://www.w3.org/2001/XMLSchema-instance",
 		SchemaLocation: "http://nomisma.org/nuds http://nomisma.org/nuds.xsd",
-		RecordType:     recordType,
+
+		RecordType: recordType,
+
+		Control: Control{
+			PublicationStatus: PublicationStatus{
+				Value: "inProcess",
+			},
+			MaintenanceStatus: MaintenanceStatus{
+				Value: "derived",
+			},
+			MaintenanceHistory: MaintenanceHistory{
+				MaintenanceEvent: []MaintenanceEvent{
+					{
+						EventType: EventType{Value: "derived"},
+						EventDateTime: EventDateTime{
+							StandardDateTime: time.Now().String(),
+							Value:            time.Now().Format("01-02-2006 15:04:05"),
+						},
+						AgentType: AgentType{Value: "machine"},
+						Agent:     Agent{"csv-nuds"},
+					},
+				},
+			},
+		},
 	}
 }

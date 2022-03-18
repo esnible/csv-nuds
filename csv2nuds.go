@@ -33,6 +33,7 @@ const (
 	Date              = "date"
 	AdditionalDetails = "additionaldetails"
 	URLRights         = "rightsurl"
+	Source            = "source"
 )
 
 type handler func(coin *simplenuds.NUDS, val string) error
@@ -40,15 +41,16 @@ type handler func(coin *simplenuds.NUDS, val string) error
 var (
 	// Handlers for the different column names
 	handlers = map[string]handler{
-		CoinID:       recordId,
-		URLCoinImage: coinSingleUrlImageHandler,
+		CoinID:       recordID,
+		URLCoinImage: coinSingleURLImageHandler,
 		Denomination: denominationHandler,
 		Metal:        metalHandler,
 		Diameter:     diameterInMMHandler,
 		Title:        titleHandler,
 		Weight:       unimplementedHandler,
 		Mint:         mintHandler,
-		URLRights:    rightsUrlHandler,
+		URLRights:    rightsURLHandler,
+		Source:       sourceHandler,
 	}
 )
 
@@ -70,15 +72,20 @@ func main() {
 	// row.  The row's values will be applied to every generated coin.
 	// It is for applying stuff that should appear on every record,
 	// such as the owner, copyright, database export timestamp, etc.
+
 	var colsEveryCoin map[int]string
+
 	var recEveryCoin []string
+
 	if len(os.Args) == 3 {
 		var csvEveryCoinReader *csv.Reader
+
 		csvEveryCoinReader, colsEveryCoin, err = csvReader(os.Args[2])
 		if err != nil {
 			fmt.Println(err.Error())
 			os.Exit(1)
 		}
+
 		recEveryCoin, err = csvEveryCoinReader.Read()
 		if err != nil {
 			fmt.Println(err.Error())
@@ -117,6 +124,7 @@ func csvReader(fileName string) (*csv.Reader, map[int]string, error) {
 	// defer fCSV.Close()
 
 	csvReader := csv.NewReader(fCSV)
+
 	header, err := csvReader.Read()
 	if err != nil {
 		return nil, nil, err
@@ -131,14 +139,14 @@ func generateColumnLookup(cols []string) map[int]string {
 
 	for col, heading := range cols {
 		retval[col] = heading
-		col++
 	}
 
 	return retval
 }
 
 // generateNUDS() generates NUDS from a slice of column values (a CSV coin row) and optional second row
-func generateNUDS(colLookup map[int]string, coin []string, everyColLookup map[int]string, every []string) (simplenuds.NUDS, error) {
+func generateNUDS(colLookup map[int]string, coin []string,
+	everyColLookup map[int]string, every []string) (simplenuds.NUDS, error) {
 	retval := simplenuds.NewNUDS("physical")
 
 	err := applyNuds(&retval, everyColLookup, every)
@@ -165,20 +173,23 @@ func applyNuds(coin *simplenuds.NUDS, colLookup map[int]string, colVals []string
 		handler, ok := handlers[strings.ToLower(colLookup[row])]
 		if !ok {
 			fmt.Fprintf(os.Stderr, "no handler for field %d (%q); ignoring\n", row, colLookup[row])
+
 			handler = unimplementedHandler
 
 			// Suppress for next coin
 			handlers[strings.ToLower(colLookup[row])] = handler
 		}
+
 		err := handler(coin, val)
 		if err != nil {
 			return err
 		}
 	}
+
 	return nil
 }
 
-func recordId(coin *simplenuds.NUDS, val string) error {
+func recordID(coin *simplenuds.NUDS, val string) error {
 	coin.Control.RecordID = val
 	return nil
 }
@@ -189,12 +200,13 @@ func recordId(coin *simplenuds.NUDS, val string) error {
 //   <mets:fileSec>
 //     <mets:fileGrp USE="obverse">
 //        <mets:file USE="archive" MIMETYPE="image/jpeg">
-//           <mets:FLocat LOCYPE="URL" xlink:href="http://numismatics.org/collectionimages/19001949/1922/1922.999.73.obv.noscale.jpg"/>
+//           <mets:FLocat LOCYPE="URL"
+//              xlink:href="http://numismatics.org/collectionimages/19001949/1922/1922.999.73.obv.noscale.jpg"/>
 //        </mets:file>
 // ...
 // mets is the namespace http://www.loc.gov/METS/
 // and the mets schema seems to be http://www.loc.gov/standards/mets/mets.xsd
-func coinSingleUrlImageHandler(coin *simplenuds.NUDS, val string) error {
+func coinSingleURLImageHandler(coin *simplenuds.NUDS, val string) error {
 	// Create a file group if one doesn't exist
 	if len(coin.DefaultDigRep().FileSec.FileGrp) == 0 {
 		coin.DefaultDigRep().FileSec.FileGrp = []simplenuds.FileGrp{
@@ -272,17 +284,25 @@ func mintHandler(coin *simplenuds.NUDS, val string) error {
 }
 
 func titleHandler(coin *simplenuds.NUDS, val string) error {
-	coin.DescMeta.Title = val
+	coin.DescMeta.DefaultTitle()[0] = simplenuds.Title{
+		Lang:  "en",
+		Value: val,
+	}
+
 	return nil
 }
 
-func rightsUrlHandler(coin *simplenuds.NUDS, val string) error {
+func rightsURLHandler(coin *simplenuds.NUDS, val string) error {
 	// Example
 	// <control>
 	//   <rightsStmt>
-	//     <license for="data" xlink:type="simple" xlink:href="http://opendatacommons.org/licenses/odbl/">Metadata are openly licensed with a Open Data Commons Open Database License (ODbL)</license>
-	//     <license for="images" xlink:type="simple" xlink:href="https://creativecommons.org/choose/mark/">Public Domain Mark</license>
-	//     <rights xlink:type="simple" xlink:href="http://rightsstatements.org/vocab/NoC-US/1.0/">No Copyright - United States</rights>
+	//     <license for="data" xlink:type="simple"
+	//         xlink:href="http://opendatacommons.org/licenses/odbl/">Metadata are openly licensed with a
+	//              Open Data Commons Open Database License (ODbL)</license>
+	//     <license for="images" xlink:type="simple"
+	//         xlink:href="https://creativecommons.org/choose/mark/">Public Domain Mark</license>
+	//     <rights xlink:type="simple"
+	//         xlink:href="http://rightsstatements.org/vocab/NoC-US/1.0/">No Copyright - United States</rights>
 	// </rightsStmt>
 
 	// warn and ignore if val is not an URL
@@ -304,6 +324,12 @@ func rightsUrlHandler(coin *simplenuds.NUDS, val string) error {
 		Href: val,
 	})
 
+	return nil
+}
+
+// The source of the data, e.g. the agent
+func sourceHandler(coin *simplenuds.NUDS, val string) error {
+	coin.Control.MaintenanceAgency.AgencyName.Value = val
 	return nil
 }
 

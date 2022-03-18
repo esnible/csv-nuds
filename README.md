@@ -1,7 +1,7 @@
 
 # csv-nuds
 
-_csv-nuds_ is a proof-of-concept for a workflow to convert from numismatic data in spreadsheets to [NUDS](https://nomisma.org/).
+_csv-nuds_ is a proof-of-concept for a workflow to convert from numismatic data in spreadsheets to [NUDS](http://www.greekcoinage.org/nuds.html), a specification from [Nomisma.org](http://nomisma.org/)
 
 Once the data is in NUDS format it can be loaded into [Numishare](https://github.com/ewg118/numishare) or other software that handles the NUDS format.
 
@@ -22,6 +22,8 @@ I have custom code to move data from named columns in CSV files into NUDS.
 Install [Go](https://en.wikipedia.org/wiki/Go_(programming_language))
 
 Execute `go run csv2nuds.go data/zeno.csv data/every-zeno.csv > data/zeno.nuds` to convert 20 records from an ad-hoc CSV file into NUDS XML.
+**Note that this XML is not a valid Document, as it contains more than one
+root.  It is a valid 'fragment'.**
 
 Note: This data was manually scraped from [https://zeno.ru/](https://zeno.ru/).  It's just 20 random Khusru II drachms.  If anyone has public-domain or Creative Commons numismatic data in CSV format please let me know.
 
@@ -39,6 +41,8 @@ unimplemented metal: "Tin-zinc alloy"
 ```
 
 This is because I couldn't quite figure out the best way to express those concepts in NUDS.  The next version should support all of the demo fields.
+
+Execute `go run csv2nuds.go data/58627.csv data/every-zeno.csv > data/58627.xml`
 
 For comparison between this tool's output and "real NUDS", an example Sasanian drachm in [the ANS collection](http://numismatics.org/search/) can be fetched from their server.
 

@@ -1,0 +1,43 @@
+ <nuds xmlns="http://nomisma.org/nuds" xmlns:mets="http://www.loc.gov/METS/" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://nomisma.org/nuds http://nomisma.org/nuds.xsd" recordType="physical">
+   <control>
+     <recordId>58627</recordId>
+     <publicationStatus>inProcess</publicationStatus>
+     <maintenanceStatus>derived</maintenanceStatus>
+     <maintenanceAgency>
+       <agencyName>Zeno.ru</agencyName>
+     </maintenanceAgency>
+     <maintenanceHistory>
+       <maintenanceEvent>
+         <eventType>derived</eventType>
+         <eventDateTime standardDateTime="2022-03-18 11:29:08.046543 -0400 EDT m=+0.000454434">03-18-2022 11:29:08</eventDateTime>
+         <agentType>machine</agentType>
+         <agent>csv-nuds</agent>
+       </maintenanceEvent>
+     </maintenanceHistory>
+     <rightsStmt>
+       <license for="data" xlink:type="simple" xlink:href="https://rightsstatements.org/page/CNE/1.0/?language=en"></license>
+       <license for="images" xlink:type="simple" xlink:href="https://rightsstatements.org/page/CNE/1.0/?language=en"></license>
+     </rightsStmt>
+   </control>
+   <descMeta>
+     <title xml:lang="en">AY, Sasanian AR drachm, Khusru II</title>
+     <typeDesc>
+       <denomination>dirham</denomination>
+       <material href="http://nomisma.org/id/ar" type="simple">Silver</material>
+     </typeDesc>
+     <physDesc>
+       <measurementsSet>
+         <diameter units="mm">30</diameter>
+       </measurementsSet>
+     </physDesc>
+   </descMeta>
+   <digRep>
+     <mets:fileSec>
+       <mets:fileGrp>
+         <mets:file>
+           <mets:FLocat LOCTYPE="URL" xlink:href="https://zeno.ru/data/7532/medium/File6779_.jpg"></mets:FLocat>
+         </mets:file>
+       </mets:fileGrp>
+     </mets:fileSec>
+   </digRep>
+ </nuds>
