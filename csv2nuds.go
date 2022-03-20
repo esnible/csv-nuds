@@ -32,10 +32,11 @@ const (
 	Title             = "title"
 	Weight            = "weight"
 	Mint              = "mint"
-	Date              = "date"
+	CreationTime      = "creationtime"
 	AdditionalDetails = "additionaldetails"
 	URLRights         = "rightsurl"
 	Source            = "source"
+	Date              = "date"
 )
 
 type handler func(coin *simplenuds.NUDS, val string) error
@@ -43,20 +44,26 @@ type handler func(coin *simplenuds.NUDS, val string) error
 var (
 	// Handlers for the different column names
 	handlers = map[string]handler{
-		CoinID:       recordID,
-		URLCoinImage: coinSingleURLImageHandler,
-		Denomination: denominationHandler,
-		Metal:        metalHandler,
-		Diameter:     diameterInMMHandler,
-		Title:        titleHandler,
-		Weight:       weightHandler,
-		Mint:         mintHandler,
-		URLRights:    rightsURLHandler,
-		Source:       sourceHandler,
+		CoinID:            recordID,
+		URLCoinImage:      coinSingleURLImageHandler,
+		Denomination:      denominationHandler,
+		Metal:             metalHandler,
+		Diameter:          diameterInMMHandler,
+		Title:             titleHandler,
+		Weight:            weightHandler,
+		Mint:              mintHandler,
+		URLRights:         rightsURLHandler,
+		Source:            sourceHandler,
+		CreationTime:      recordCreatedDateHandler,
+		Reporter:          reporterHandler,
+		AdditionalDetails: detailsHandler,
+		// TODO DateHandler.  The particular dataset I used for testing
+		// had 100% invalid data for date: "?", "BBA" (a mint!), and "x2"
 	}
 )
 
 // Convert CSV to NUDS
+// nolint: funlen
 func main() {
 
 	if len(os.Args) < 3 || len(os.Args) > 4 {
@@ -106,6 +113,7 @@ func main() {
 		if err == io.EOF {
 			break
 		}
+
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err.Error())
 			os.Exit(1)
@@ -122,8 +130,10 @@ func main() {
 			fmt.Fprintln(os.Stderr, err.Error())
 			os.Exit(1)
 		}
+
 		encoder := xml.NewEncoder(fXML)
 		encoder.Indent(" ", "  ")
+
 		err = encoder.Encode(nuds)
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err.Error())
@@ -278,6 +288,7 @@ func metalHandler(coin *simplenuds.NUDS, val string) error {
 	}
 
 	coin.DescMeta.TypeDesc.AppendMaterial(material)
+
 	return nil
 }
 
@@ -308,14 +319,13 @@ func weightHandler(coin *simplenuds.NUDS, val string) error {
 }
 
 func mintHandler(coin *simplenuds.NUDS, val string) error {
-	// TODO.  For example example
+	// TODO.  nolint:godox
 	// http://numismatics.org/collection/1960.10.1.xml
 	// has
 	// <geographic>
 	//   <geogname xlink:role="region" xlink:type="simple">Mashriq</geogname>
 	//   <geogname xlink:role="locality" xlink:type="simple">uncertain</geogname>
 	// </geographic>
-
 	return nil
 }
 
@@ -328,18 +338,18 @@ func titleHandler(coin *simplenuds.NUDS, val string) error {
 	return nil
 }
 
+// Example
+// <control>
+//   <rightsStmt>
+//     <license for="data" xlink:type="simple"
+//         xlink:href="http://opendatacommons.org/licenses/odbl/">Metadata are openly licensed with a
+//              Open Data Commons Open Database License (ODbL)</license>
+//     <license for="images" xlink:type="simple"
+//         xlink:href="https://creativecommons.org/choose/mark/">Public Domain Mark</license>
+//     <rights xlink:type="simple"
+//         xlink:href="http://rightsstatements.org/vocab/NoC-US/1.0/">No Copyright - United States</rights>
+// </rightsStmt>
 func rightsURLHandler(coin *simplenuds.NUDS, val string) error {
-	// Example
-	// <control>
-	//   <rightsStmt>
-	//     <license for="data" xlink:type="simple"
-	//         xlink:href="http://opendatacommons.org/licenses/odbl/">Metadata are openly licensed with a
-	//              Open Data Commons Open Database License (ODbL)</license>
-	//     <license for="images" xlink:type="simple"
-	//         xlink:href="https://creativecommons.org/choose/mark/">Public Domain Mark</license>
-	//     <rights xlink:type="simple"
-	//         xlink:href="http://rightsstatements.org/vocab/NoC-US/1.0/">No Copyright - United States</rights>
-	// </rightsStmt>
 
 	// warn and ignore if val is not an URL
 	_, err := url.ParseRequestURI(val)
@@ -365,7 +375,61 @@ func rightsURLHandler(coin *simplenuds.NUDS, val string) error {
 
 // The source of the data, e.g. the agent
 func sourceHandler(coin *simplenuds.NUDS, val string) error {
+	// Note that `AgencyName` appears on the admin screen,
+	// http://localhost:9080/orbeon/numishare/admin/edit/coin/?id=215654
+	// but the screen users see, e.g.
+	// http://localhost:9080/orbeon/numishare/collection1/id/215654
+	// will not show it.
+	// will not show it, although it will "export".
 	coin.Control.MaintenanceAgency.AgencyName.Value = val
+	return nil
+}
+
+// When this record was created digitally for the first time
+func recordCreatedDateHandler(coin *simplenuds.NUDS, val string) error {
+	// Note that `EventDateTime` appears on the admin screen,
+	// http://localhost:9080/orbeon/numishare/admin/edit/coin/?id=215654
+	// but the screen users see, e.g.
+	// http://localhost:9080/orbeon/numishare/collection1/id/215654
+	// will not show it, although it will "export".
+	creationEvent := coin.Control.MaintenanceHistory.
+		GetOrCreateEventType("created")
+	creationEvent.EventDateTime.Value = val
+	creationEvent.EventDateTime.StandardDateTime = val
+
+	return nil
+}
+
+// Who created the original record
+func reporterHandler(coin *simplenuds.NUDS, val string) error {
+	// Note that `AgencyName` appears on the admin screen,
+	// http://localhost:9080/orbeon/numishare/admin/edit/coin/?id=215654
+	// but the screen users see, e.g.
+	// http://localhost:9080/orbeon/numishare/collection1/id/215654
+	// will not show it.
+	// will not show it, although it will "export".
+	creationEvent := coin.Control.MaintenanceHistory.
+		GetOrCreateEventType("created")
+
+	creationEvent.Agent.Value = val
+
+	// We assume all Zeno.ru records are created by humans
+	creationEvent.AgentType.Value = "human"
+
+	return nil
+}
+
+func detailsHandler(coin *simplenuds.NUDS, val string) error {
+	coin.DescMeta.AppendDescriptionSet(
+		simplenuds.DescriptionSet{
+			Description: []simplenuds.Description{
+				{
+					Value: val,
+				},
+			},
+		},
+	)
+
 	return nil
 }
 
@@ -377,7 +441,7 @@ func getMaterial(material string) (simplenuds.Material, error) {
 	HRefs := map[string]string{
 		"AR": "http://nomisma.org/id/ar",
 		"AV": "http://nomisma.org/id/av",
-		// TODO Structured types for other common metals
+		// TODO Structured types for other common metals nolint:godox
 	}
 	Texts := map[string]string{
 		"AR": "Silver",

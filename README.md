@@ -38,17 +38,12 @@ In addition to writing the data the tool currently outputs
 ```
 no handler for field 1 ("url"); ignoring
 no handler for field 3 ("date"); ignoring
-no handler for field 10 ("reporter"); ignoring
 no handler for field 11 ("reporterUrl"); ignoring
-no handler for field 0 ("source"); ignoring
-no handler for field 12 ("additionalDetails"); ignoring
 unimplemented metal: "silver washed AE"
 unimplemented metal: "Tin-zinc alloy"
 ```
 
-- In the next version I'll try to make the demo Zeno `reporter` and upload date into a `<maintenanceEvent>`.
-- I'll make `additionalDetails` into a `<noteSet>` `<note>`.
-- I'll make the Zeno `reporterUrl` into an `<acknowledgement>`.  (I originally considered `<copyrightHolder>` (even though it might not be), or perhaps `<owner>`).
+- I'll like make the Zeno `reporterUrl` into an `<acknowledgement>`.  (I originally considered `<copyrightHolder>` (even though it might not be), or perhaps `<owner>`).  None of these appear in Numishare (at this time.)
 - I am not sure what to make the Zeno `url` into.  Zeno itself might be a `<collection>` (but of images, not coins).  There should be some kind of way to refer/link to another representation of the same object, but I don't know it.
 - The Zeno category (not currently in the CSV) will become a `<department>`.  There will be thousands of them.
 - Numishare has `<material xlink:href="http://nomisma.org/id/sn" xlink:type="simple">Tin</material>` but nothing for a Tin-zinc alloy.

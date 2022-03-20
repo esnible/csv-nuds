@@ -16,11 +16,11 @@ type NUDS struct {
 	// See https://github.com/golang/go/issues/11496
 	// for discussion of namespace serialization causing us to put namespace like this.
 	XMLNS          string `xml:"xmlns,attr"`
-	METS_NS        string `xml:"xmlns:mets,attr"`
-	TEI_NS         string `xml:"xmlns:tei,attr"`
-	XS_NS          string `xml:"xmlns:xs,attr"`
-	XLINK_NS       string `xml:"xmlns:xlink,attr"`
-	XSI_NS         string `xml:"xmlns:xsi,attr"`
+	METS_NS        string `xml:"xmlns:mets,attr"`  // nolint: golint,stylecheck
+	TEI_NS         string `xml:"xmlns:tei,attr"`   // nolint: golint,stylecheck
+	XS_NS          string `xml:"xmlns:xs,attr"`    // nolint: golint,stylecheck
+	XLINK_NS       string `xml:"xmlns:xlink,attr"` // nolint: golint,stylecheck
+	XSI_NS         string `xml:"xmlns:xsi,attr"`   // nolint: golint,stylecheck
 	SchemaLocation string `xml:"xsi:schemaLocation,attr"`
 
 	// The @recordType is a required attribute for the <nuds> root element.
@@ -39,7 +39,7 @@ type NUDS struct {
 type Control struct {
 	RecordID string `xml:"recordId"`
 
-	// TODO
+	// TODO nolint:godox
 	// <xs:element maxOccurs="unbounded" minOccurs="0" ref="otherRecordId"/>
 
 	// <xs:element ref="publicationStatus"/>
@@ -70,10 +70,17 @@ type DescMeta struct {
 	// Title may be repeated if the title is to be available in numerous languages
 	Title []Title `xml:"title"`
 
-	// TODO
-	//<xs:element minOccurs="0" ref="descriptionSet"/>
-	//<xs:element minOccurs="0" ref="noteSet"/>
+	// TODO nolint:godox
 	//<xs:element minOccurs="0" ref="subjectSet"/>
+	//<xs:element minOccurs="0" ref="undertypeDesc"/>
+	//<xs:element minOccurs="0" ref="findspotDesc"/>
+	//<xs:element minOccurs="0" ref="refDesc"/>
+
+	//<xs:element minOccurs="0" ref="descriptionSet"/>
+	DescriptionSet []DescriptionSet `xml:"descriptionSet"`
+
+	//<xs:element minOccurs="0" ref="noteSet"/>
+	NoteSet []NoteSet `xml:"noteSet"`
 
 	// <xs:element minOccurs="1" ref="typeDesc"/>
 	TypeDesc TypeDesc `xml:"typeDesc"`
@@ -81,11 +88,8 @@ type DescMeta struct {
 	//<xs:element minOccurs="0" ref="physDesc"/>
 	PhysDesc *PhysDesc `xml:"physDesc"`
 
-	// TODO
-	//<xs:element minOccurs="0" ref="undertypeDesc"/>
-	//<xs:element minOccurs="0" ref="findspotDesc"/>
-	//<xs:element minOccurs="0" ref="refDesc"/>
 	//<xs:element minOccurs="0" ref="adminDesc"/>
+	AdminDesc *AdminDesc `xml:"adminDesc"`
 }
 
 // Object title. It may be repeated if the title is to be available in numerous languages
@@ -98,6 +102,42 @@ type Title struct {
 	// <xs:attributeGroup ref="nuds_a.localType"/>
 	Value string `xml:",chardata"`
 }
+
+// Description Set is a container for an unliminted number of <description> elements
+// in order to provide descriptive prose about an object, such as historical or artistic context.
+type DescriptionSet struct {
+	// <xs:element maxOccurs="unbounded" ref="description"/>
+	Description []Description `xml:"description"`
+}
+
+// A generic element .... It may contain just free-text or an unbounded
+// number of <ab> (anonymous block) elements to facilitate greater
+// flexibility in prose encoding with TEI paragraph content namespaced in.
+type Description struct {
+	// <xs:attribute ref="xml:id"/>
+	// <xs:attribute ref="xml:lang"/>
+
+	// <xs:attributeGroup ref="m.default"/>
+	Value string `xml:",chardata"`
+}
+
+type Descriptions []Description
+
+// Note Set is a container for an unliminted number of <note> elements.
+type NoteSet struct {
+	// <xs:element maxOccurs="unbounded" ref="note"/>
+	Note []Note `xml:"note"`
+}
+
+// ... intended to capture brief miscellaneous statements about the NUDS
+// instance. For greater historical, artistic, etc. context, use <descriptionSet> instead.
+type Note struct {
+	// <xs:attribute ref="xml:id"/>
+	// <xs:attribute ref="xml:lang"/>
+	Value string `xml:",chardata"`
+}
+
+type Notes []Note
 
 // The Typological Description, <typeDesc>, is a container for
 // typological characteristics of a resource, whether a physical
@@ -157,7 +197,7 @@ type MeasurementsSet struct {
 	// <xs:element minOccurs="0" ref="diameter"/>
 	Diameter *Diameter `xml:"diameter"`
 
-	// TODO
+	// TODO nolint:godox
 	// <xs:element minOccurs="0" ref="height"/>
 	// <xs:element minOccurs="0" ref="thickness"/>
 	// <xs:element minOccurs="0" ref="length"/>
@@ -172,8 +212,6 @@ type MeasurementsSet struct {
 // may be included as attributes. The <diameter> should not be used in
 // conjunction with <height> and <width>.
 type Diameter struct {
-	// TODO Try to use Golang anonymous type inheritance here
-
 	// Names the unit used for the measurement. Suggested values include: 1] g; 2] cm; 3] mm
 	Units string `xml:"units,attr,omitempty"`
 
@@ -231,7 +269,7 @@ type MaintenanceAgency struct {
 	// <xs:element ref="agencyName"/>
 	AgencyName AgencyName `xml:"agencyName"`
 
-	// TODO
+	// TODO nolint:godox
 	// <xs:element minOccurs="0" ref="agencyCode"/>
 	// <xs:element maxOccurs="unbounded" minOccurs="0" ref="otherAgencyCode"/>
 }
@@ -239,7 +277,7 @@ type MaintenanceAgency struct {
 // The name of the institution or service responsible for the creation,
 // maintenance, and/or dissemination of the NUDS instance.
 type AgencyName struct {
-	// TODO
+	// TODO nolint:godox
 	// <xs:attribute ref="xml:id"/>
 	// <xs:attribute ref="xml:lang"/>
 
@@ -252,7 +290,7 @@ type MaintenanceHistory struct {
 	// <xs:element maxOccurs="unbounded" ref="maintenanceEvent"/>
 	MaintenanceEvent []MaintenanceEvent `xml:"maintenanceEvent"`
 
-	// TODO
+	// TODO nolint:godox
 	// <xs:attribute ref="xml:id"/>
 	// <xs:attribute ref="xml:lang"/>
 }
@@ -272,7 +310,7 @@ type MaintenanceEvent struct {
 	// <xs:element ref="agent"/>
 	Agent Agent `xml:"agent"`
 
-	// TODO
+	// TODO nolint:godox
 	// <xs:element minOccurs="0" maxOccurs="1" ref="eventDescription"/>
 	// <xs:element minOccurs="0" maxOccurs="1" ref="source"/>
 	// <xs:attribute ref="xml:id"/>
@@ -344,6 +382,32 @@ type License struct {
 type DigRep struct {
 	// XMLName  xml.Name `xml:"control"`
 	FileSec FileSec `xml:"mets:fileSec"`
+}
+
+// The Administrative Description contains information pertaining to provenance,
+// accessioning, deaccessioning, and other administrative metadata. This element
+// should not be used in conceptual records.
+type AdminDesc struct {
+	// TODO nolint:godox
+	// <xs:element ref="identifier"/>
+	// <xs:element minOccurs="0" maxOccurs="unbounded" ref="department"/>
+	// <xs:element ref="collection"/>
+	// <xs:element ref="repository"/>
+	// <xs:element ref="physloc"/>
+	// <xs:element ref="owner"/>
+	// <xs:element ref="display"/>
+	// <xs:element ref="appraisal"/>
+	// <xs:element ref="provenance"/>
+
+	// <xs:element ref="acknowledgment"/>
+	Acknowledgement Acknowlegement `xml:"acknowledgement"`
+}
+
+type Acknowlegement struct {
+	// <xs:attribute ref="xml:id"/>
+	// <xs:attribute ref="xml:lang"/>
+	// <xs:attributeGroup ref="m.default"/>
+	// <xs:attributeGroup ref="xlink:simpleLink"/>
 }
 
 // See http://www.loc.gov/standards/mets/mets.xsd
@@ -425,6 +489,24 @@ func (physDesc *PhysDesc) DefaultMeasurementsSet() *MeasurementsSet {
 	return physDesc.MeasurementsSet
 }
 
+/*
+func (descMeta *DescMeta) DefaultDescriptionSet() []DescriptionSet {
+	if descMeta.DescriptionSet == nil {
+		descMeta.DescriptionSet = []DescriptionSet{}
+	}
+
+	return descMeta.DescriptionSet
+}
+
+func (descMeta *DescMeta) DefaultNoteSet() []NoteSet {
+	if descMeta.NoteSet == nil {
+		descMeta.NoteSet = []NoteSet{}
+	}
+
+	return descMeta.NoteSet
+}
+*/
+
 func (descMeta *DescMeta) DefaultTitle() []Title {
 	if descMeta.Title == nil {
 		descMeta.Title = []Title{
@@ -435,47 +517,101 @@ func (descMeta *DescMeta) DefaultTitle() []Title {
 	return descMeta.Title
 }
 
+func (maintenanceHistory *MaintenanceHistory) DefaultMaintenanceEvent() []MaintenanceEvent {
+	if maintenanceHistory.MaintenanceEvent == nil {
+		maintenanceHistory.MaintenanceEvent = []MaintenanceEvent{
+			{}, // maintenanceEvent is minOccurs 1, maxOccurs unbounded
+		}
+	}
+
+	return maintenanceHistory.MaintenanceEvent
+}
+
 // Appenders
 
 func (typeDesc *TypeDesc) AppendDenomination(denomination Denomination) {
-	denominations := typeDesc.Denomination
-	if denominations == nil {
-		denominations = []Denomination{}
+	if typeDesc.Denomination == nil {
+		typeDesc.Denomination = []Denomination{}
 	}
 
 	typeDesc.Denomination = append(
-		denominations,
+		typeDesc.Denomination,
 		denomination)
 }
 
 func (typeDesc *TypeDesc) AppendMaterial(material Material) {
-	materials := typeDesc.Material
-	if materials == nil {
-		materials = []Material{}
+	if typeDesc.Material == nil {
+		typeDesc.Material = []Material{}
 	}
+
 	typeDesc.Material = append(
-		materials,
+		typeDesc.Material,
 		material)
 }
 
 func (fileGrp *FileGrp) AppendFile(file File) {
-	files := fileGrp.File
-	if files == nil {
-		files = []File{}
+	if fileGrp.File == nil {
+		fileGrp.File = []File{}
 	}
+
 	fileGrp.File = append(
-		files,
+		fileGrp.File,
 		file)
 }
 
 func (rightsStmt *RightsStmt) AppendLicense(license License) {
-	licenses := rightsStmt.License
-	if licenses == nil {
-		licenses = []License{}
+	if rightsStmt.License == nil {
+		rightsStmt.License = []License{}
 	}
+
 	rightsStmt.License = append(
-		licenses,
+		rightsStmt.License,
 		license)
+}
+
+func (descMeta *DescMeta) AppendDescriptionSet(descriptionSet DescriptionSet) {
+	if descMeta.DescriptionSet == nil {
+		descMeta.DescriptionSet = []DescriptionSet{}
+	}
+
+	descMeta.DescriptionSet = append(
+		descMeta.DescriptionSet,
+		descriptionSet)
+}
+
+func (descMeta *DescMeta) AppendNoteSet(noteSet NoteSet) {
+	if descMeta.NoteSet == nil {
+		descMeta.NoteSet = []NoteSet{}
+	}
+
+	descMeta.NoteSet = append(
+		descMeta.NoteSet,
+		noteSet)
+}
+
+// Lookups
+
+func (maintenanceHistory *MaintenanceHistory) GetOrCreateEventType(eventType string) *MaintenanceEvent {
+	if maintenanceHistory.MaintenanceEvent == nil {
+		maintenanceHistory.MaintenanceEvent = []MaintenanceEvent{}
+	}
+
+	for i, maintenanceEvent := range maintenanceHistory.MaintenanceEvent {
+		if maintenanceEvent.EventType.Value == eventType {
+			return &maintenanceHistory.MaintenanceEvent[i]
+		}
+	}
+
+	maintenanceEvent := MaintenanceEvent{
+		EventType: EventType{Value: eventType},
+	}
+
+	pos := len(maintenanceHistory.MaintenanceEvent)
+	maintenanceHistory.MaintenanceEvent =
+		append(maintenanceHistory.MaintenanceEvent,
+			maintenanceEvent)
+
+	return &maintenanceHistory.MaintenanceEvent[pos]
 }
 
 // Generators
