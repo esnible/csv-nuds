@@ -9,7 +9,7 @@ A lot of numismatic data is stored in relational databases or spreadsheets.  Man
 
 The idea behind csv-nuds is to export all the data currently in flat files and databases and produce XML that is valid to [the NUDS schema](http://nomisma.org/nuds.xsd).  NUDS data can be loaded into Numishare or as an interchange format between different systems.
 
-### Tutorial / Regenerating test data
+### Tutorial / Regenerating NUDS from tutorial sample data
 
 Install [Go](https://en.wikipedia.org/wiki/Go_(programming_language))
 
@@ -60,3 +60,9 @@ My goal is for this tool to produce XML with a similar level of complexity.
 I was unable to generate language bindings from http://nomisma.org/nuds.xsd so I have created a simple subset of NUDS by hand.
 
 I have custom code to move data from named columns in CSV files into NUDS.
+
+### Testing
+
+We test the code with `go test -v ./...`
+
+The test compares a coin expressed in key/value pairs with NUDS XML stored in a golden file.  Expected NUDS XML are stored in the [converter/testdata](converter/testdata) folder.

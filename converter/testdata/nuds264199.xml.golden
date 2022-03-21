@@ -1,0 +1,50 @@
+ <nuds xmlns="http://nomisma.org/nuds" xmlns:mets="http://www.loc.gov/METS/" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://nomisma.org/nuds http://nomisma.org/nuds.xsd" recordType="physical">
+   <control>
+     <recordId>264199</recordId>
+     <publicationStatus>inProcess</publicationStatus>
+     <maintenanceStatus>derived</maintenanceStatus>
+     <maintenanceAgency>
+       <agencyName>Zeno.ru</agencyName>
+     </maintenanceAgency>
+     <maintenanceHistory>
+       <maintenanceEvent>
+         <eventType>derived</eventType>
+         <eventDateTime standardDateTime="0001-01-01 00:00:00 +0000 UTC">01-01-0001 00:00:00</eventDateTime>
+         <agentType>machine</agentType>
+         <agent>csv-nuds</agent>
+       </maintenanceEvent>
+       <maintenanceEvent>
+         <eventType>created</eventType>
+         <eventDateTime standardDateTime="13 Dec 20 11:55:36 +0300">13 Dec 20 11:55:36 +0300</eventDateTime>
+         <agentType>human</agentType>
+         <agent>Ombo</agent>
+       </maintenanceEvent>
+     </maintenanceHistory>
+     <rightsStmt>
+       <license for="data" xlink:type="simple" xlink:href="https://rightsstatements.org/page/CNE/1.0/?language=en"></license>
+       <license for="images" xlink:type="simple" xlink:href="https://rightsstatements.org/page/CNE/1.0/?language=en"></license>
+     </rightsStmt>
+   </control>
+   <descMeta>
+     <title xml:lang="en">Sasanid , Kaykhusru 2 , AR drakhme</title>
+     <typeDesc>
+       <denomination>Drakhm</denomination>
+       <material href="http://nomisma.org/id/ar" type="simple">Silver</material>
+     </typeDesc>
+     <physDesc>
+       <measurementsSet>
+         <diameter units="mm">29</diameter>
+         <weight units="g">3.62</weight>
+       </measurementsSet>
+     </physDesc>
+   </descMeta>
+   <digRep>
+     <mets:fileSec>
+       <mets:fileGrp USE="combined">
+         <mets:file USE="reference">
+           <mets:FLocat LOCTYPE="URL" xlink:href="https://zeno.ru/data/2807/medium/Kaykhusru-24.jpg"></mets:FLocat>
+         </mets:file>
+       </mets:fileGrp>
+     </mets:fileSec>
+   </digRep>
+ </nuds>

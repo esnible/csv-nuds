@@ -616,7 +616,7 @@ func (maintenanceHistory *MaintenanceHistory) GetOrCreateEventType(eventType str
 
 // Generators
 
-func NewNUDS(recordType string) NUDS {
+func NewNUDS(recordType string, timestamp time.Time) NUDS {
 	return NUDS{
 		XMLNS:          "http://nomisma.org/nuds",
 		METS_NS:        "http://www.loc.gov/METS/",
@@ -640,8 +640,8 @@ func NewNUDS(recordType string) NUDS {
 					{
 						EventType: EventType{Value: "derived"},
 						EventDateTime: EventDateTime{
-							StandardDateTime: time.Now().String(),
-							Value:            time.Now().Format("01-02-2006 15:04:05"),
+							StandardDateTime: timestamp.String(),
+							Value:            timestamp.Format("01-02-2006 15:04:05"),
 						},
 						AgentType: AgentType{Value: "machine"},
 						Agent:     Agent{"csv-nuds"},
